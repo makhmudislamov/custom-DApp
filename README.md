@@ -1,5 +1,5 @@
-## Custom Dapp Project: PROJECT NAME
+## Custom Dapp Project: PROJECT X
 
 Details of the project will go here
 
-Check out the proposal of this porject [here](proposal.md).
+Check out the proposal of this project [here](proposal.md).
