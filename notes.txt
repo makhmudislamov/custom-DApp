@@ -1,0 +1,4 @@
+Had issues with truffle:
+- restored ownership
+Gnache:
+- used quickstart before starting the project
