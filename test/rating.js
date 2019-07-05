@@ -49,15 +49,58 @@ contract("Rating", function (accounts) {
             // comparing event type
             assert.equal(receipt.logs.length, 1, "an event was triggered");
             assert.equal(receipt.logs[0].event, "ratedEvent", "the event type is correct");
-            assert.equal(receipt.logs[0].args._tenantId.toNumber(), tenantId, "the candidate id is correct");
+            assert.equal(receipt.logs[0].args._tenantId.toNumber(), tenantId, "the tenant id is correct");
             return ratingInstance.raters(accounts[0]);
         }).then(function (rated) {
             assert(rated, "the voter was marked as rated");
             return ratingInstance.tenants(tenantId);
         }).then(function (tenant) {
             var rateCount = tenant[2];
-            assert.equal(rateCount, 1, "increments the tenant's vote count");
+            assert.equal(rateCount, 1, "increments the tenant's rate count");
         })
+    });
+
+    // invalid tenants cannot have a rating
+    it("throws an exception for invalid tenants", function () {
+        return Rating.deployed().then(function (instance) {
+            ratingInstance = instance;
+            return ratingInstance.rate(99, { from: accounts[1] })
+        }).then(assert.fail).catch(function (error) {
+            assert(error.message.indexOf('revert') >= 0, "error message must contain revert");
+            return ratingInstance.tenants(1);
+        }).then(function (tenant1) {
+            var rateCount = tenant1[2];
+            assert.equal(rateCount, 1, "tenant1 did not receive any votes");
+            return ratingInstance.tenants(2);
+        }).then(function (tenant2) {
+            var rateCount = tenant2[2];
+            assert.equal(rateCount, 0, "tenant 2 did not receive any votes");
+        });
+    });
+
+    // double voting is not allowed
+    it("throws an exception for double rating", function () {
+        return Rating.deployed().then(function (instance) {
+            ratingInstance = instance;
+            tenantId = 2;
+            ratingInstance.rate(tenantId, { from: accounts[1] });
+            return ratingInstance.tenants(tenantId);
+        }).then(function (tenant) {
+            var rateCount = tenant[2];
+            assert.equal(rateCount, 1, "accepts first rate");
+            // Try to rate again
+            return ratingInstance.rate(tenantId, { from: accounts[1] });
+        }).then(assert.fail).catch(function (error) {
+            assert(error.message.indexOf('revert') >= 0, "error message must contain revert");
+            return ratingInstance.tenants(1);
+        }).then(function (tenant1) {
+            var rateCount = tenant1[2];
+            assert.equal(rateCount, 1, "tenant 1 did not receive any votes");
+            return ratingInstance.tenants(2);
+        }).then(function (tenant2) {
+            var rateCount = tenant2[2];
+            assert.equal(rateCount, 1, "tenant 2 did not receive any votes");
+        });
     });
 
 });

@@ -25,8 +25,6 @@ pragma solidity ^0.5.0;
 
      /// storing tenant count
      uint public tenantsCount;
-     
-
     /// event of leaving a rating
     event ratedEvent (
         uint indexed _tenantId
@@ -52,10 +50,16 @@ pragma solidity ^0.5.0;
     function rate (uint _tenantId) public {
         /// @notice this is very basic function
         /// landlord/lady can rate only once
-        require(!raters[msg.sender]);
+        require(
+            !raters[msg.sender],
+            "You already rated"
+        );
 
         // require a valid candidate
-        require(_tenantId > 0 && _tenantId <= tenantsCount);
+        require(
+            _tenantId > 0 && _tenantId <= tenantsCount,
+            "This tenant does not exist"
+        );
 
         // record that voter has voted
         raters[msg.sender] = true;
