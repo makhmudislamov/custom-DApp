@@ -46,6 +46,7 @@ contract("Rating", function (accounts) {
             tenantId = 1;
             return ratingInstance.rate(tenantId, { from: accounts[0] });
         }).then(function (receipt) {
+            // comparing event type
             assert.equal(receipt.logs.length, 1, "an event was triggered");
             assert.equal(receipt.logs[0].event, "ratedEvent", "the event type is correct");
             assert.equal(receipt.logs[0].args._tenantId.toNumber(), tenantId, "the candidate id is correct");
