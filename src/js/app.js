@@ -2,7 +2,7 @@ App = {
   web3Provider: null,
   contracts: {},
   account: '0x0',
-  hasVoted: false,
+  hasRated: false,
 
   init: function () {
     return App.initWeb3();
@@ -41,7 +41,7 @@ App = {
       // Restart Chrome if you are unable to receive this event
       // This is a known issue with Metamask
       // https://github.com/MetaMask/metamask-extension/issues/2393
-      instance.votedEvent({}, {
+      instance.ratedEvent({}, {
         fromBlock: 0,
         toBlock: 'latest'
       }).watch(function (error, event) {

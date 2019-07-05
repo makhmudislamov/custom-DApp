@@ -37,6 +37,26 @@ contract("Rating", function (accounts) {
             assert.equal(tenant[1], "Lara Croft", "contains the correct name");
             assert.equal(tenant[2], 0, "contains the correct rating count");
         });
-    });  
+    });
+    
+    // can landlord/lady rate a tenant?
+    it("allows a lanlord to rate", function () {
+        return Rating.deployed().then(function (instance) {
+            ratingInstance = instance;
+            tenantId = 1;
+            return ratingInstance.rate(tenantId, { from: accounts[0] });
+        }).then(function (receipt) {
+            assert.equal(receipt.logs.length, 1, "an event was triggered");
+            assert.equal(receipt.logs[0].event, "ratedEvent", "the event type is correct");
+            assert.equal(receipt.logs[0].args._tenantId.toNumber(), tenantId, "the candidate id is correct");
+            return ratingInstance.raters(accounts[0]);
+        }).then(function (rated) {
+            assert(rated, "the voter was marked as rated");
+            return ratingInstance.tenants(tenantId);
+        }).then(function (tenant) {
+            var rateCount = tenant[2];
+            assert.equal(rateCount, 1, "increments the tenant's vote count");
+        })
+    });
 
 });
