@@ -13,29 +13,34 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-What things you need to install the software and how to install them
+For local use, please have the following installations
 
 ```
-Give examples
+1. Ganache
+2. Truffle
+3. Node dependency management
 ```
 
 ### Installing
 
-A step by step series of examples that tell you how to get a development env running
+A step by step instructions
 
 Say what the step will be
 
+
+[Ganache link](https://www.trufflesuite.com/ganache)
+
+
+
+
 ```
-Give the example
+npm install -g truffle
 ```
 
-And repeat
-
+Running the app in localhost
 ```
-until finished
+npm run dev
 ```
-
-End with an example of getting some data out of the system or using it for a little demo
 
 ## Running the tests
 
@@ -43,45 +48,14 @@ End with an example of getting some data out of the system or using it for a lit
 truffle test
 ```
 
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-## Deployment
-
-Add additional notes about how to deploy this on a live system
 
 ## Built With
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+* [Solidity](https://solidity.readthedocs.io/en/v0.5.10/) - Etherium network
+* [Node](https://nodejs.org/en/docs/) - Dependency Management
+* [Truffle](https://www.trufflesuite.com/docs/truffle/getting-started/installation) - Blockchain Framework
 
-## Contributing
 
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
-
-## Authors
-
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 
 ## License
 
@@ -89,6 +63,5 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 ## Acknowledgments
 
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
+* Make School - BEW2-4 class
+* Dapp University
