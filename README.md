@@ -53,6 +53,7 @@ truffle test
 
 * [Solidity](https://solidity.readthedocs.io/en/v0.5.10/) - Etherium network
 * [Node](https://nodejs.org/en/docs/) - Dependency Management
+* [Metamask](https://metamask.io/) - Etherium Extension for browsers
 * [Truffle](https://www.trufflesuite.com/docs/truffle/getting-started/installation) - Blockchain Framework
 
 
